@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Preparación PAA - Colegios Científicos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            overflow-x: hidden;
+            color: #2d3436;
+        }
+
+        /* ===== PARTICULAS FLOTANTES ===== */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: floatParticle linear infinite;
+            opacity: 0.6;
+        }
+
+        .particle:nth-child(1) { width: 20px; height: 20px; background: #ff6b6b; left: 10%; animation-duration: 12s; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 15px; height: 15px; background: #ffd93d; left: 25%; animation-duration: 15s; animation-delay: 2s; }
+        .particle:nth-child(3) { width: 25px; height: 25px; background: #6bcb77; left: 40%; animation-duration: 10s; animation-delay: 1s; }
+        .particle:nth-child(4) { width: 18px; height: 18px; background: #4d96ff; left: 55%; animation-duration: 14s; animation-delay: 3s; }
+        .particle:nth-child(5) { width: 22px; height: 22px; background: #ff6b6b; left: 70%; animation-duration: 11s; animation-delay: 0.5s; }
+        .particle:nth-child(6) { width: 12px; height: 12px; background: #ffd93d; left: 85%; animation-duration: 16s; animation-delay: 4s; }
+        .particle:nth-child(7) { width: 30px; height: 30px; background: #a66cff; left: 5%; animation-duration: 13s; animation-delay: 2.5s; }
+        .particle:nth-child(8) { width: 16px; height: 16px; background: #6bcb77; left: 90%; animation-duration: 9s; animation-delay: 1.5s; }
+        .particle:nth-child(9) { width: 20px; height: 20px; background: #ff9a3c; left: 60%; animation-duration: 17s; animation-delay: 5s; }
+        .particle:nth-child(10) { width: 14px; height: 14px; background: #4d96ff; left: 35%; animation-duration: 12s; animation-delay: 3.5s; }
+        .particle:nth-child(11) { width: 28px; height: 28px; background: #ff6b9d; left: 75%; animation-duration: 14s; animation-delay: 1s; }
+        .particle:nth-child(12) { width: 10px; height: 10px; background: #ffd93d; left: 50%; animation-duration: 18s; animation-delay: 6s; }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(110vh) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+                transform: translateY(90vh) rotate(36deg) scale(1);
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            z-index: 1;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(108, 99, 255, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 50% 80%, rgba(255, 107, 107, 0.06) 0%, transparent 50%);
+            animation: bgPulse 8s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(3deg); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: heroEntrance 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        @keyframes heroEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(80px) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b, #ff9a3c);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            animation: badgePulse 2s ease-in-out infinite, heroEntrance 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.2s;
+            opacity: 0;
+            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 6px 30px rgba(255, 107, 107, 0.6); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #2d3436 0%, #636e72 50%, #2d3436 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmerText 4s linear infinite, heroEntrance 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.5s;
+            opacity: 0;
+        }
+
+        @keyframes shimmerText {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .hero h1 span {
+            display: block;
+            background: linear-gradient(135deg, #ff6b6b, #ff9a3c, #ffd93d, #6bcb77, #4d96ff, #a66cff);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbowText 4s linear infinite;
+        }
+
+        @keyframes rainbowText {
+            0% { background-position: 0% center; }
+            100% { background-position: 300% center; }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            color: #636e72;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            animation: heroEntrance 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.8s;
+            opacity: 0;
+        }
+
+        .hero-subtitle strong {
+            color: #2d3436;
+            font-weight: 700;
+        }
+
+        /* ===== TARJETA PRINCIPAL ===== */
+        .main-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 700px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08),
+                        0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+            animation: heroEntrance 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 1s;
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff, #a66cff);
+            animation: borderSlide 3s linear infinite;
+        }
+
+        @keyframes borderSlide {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(245,247,250,0.9));
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: cardFloat 3s ease-in-out infinite;
+        }
+
+        .info-item:nth-child(1) { animation-delay: 0s; }
+        .info-item:nth-child(2) { animation-delay: 0.5s; }
+        .info-item:nth-child(3) { animation-delay: 1s; }
+        .info-item:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .info-item:hover {
+            transform: translateY(-12px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .info-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+            animation: iconBounce 2s ease-in-out infinite;
+        }
+
+        .info-item:nth-child(1) .info-icon { animation-delay: 0s; }
+        .info-item:nth-child(2) .info-icon { animation-delay: 0.3s; }
+        .info-item:nth-child(3) .info-icon { animation-delay: 0.6s; }
+        .info-item:nth-child(4) .info-icon { animation-delay: 0.9s; }
+
+        @keyframes iconBounce {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.2) rotate(-5deg); }
+            75% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #b2bec3;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .info-value {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #2d3436;
+        }
+
+        /* ===== PRECIO ===== */
+        .price-section {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .price-tag {
+            display: inline-block;
+            position: relative;
+        }
+
+        .price-label {
+            font-size: 0.9rem;
+            color: #b2bec3;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-amount {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #00b894, #00cec9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            animation: pricePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pricePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .price-currency {
+            font-size: 1rem;
+            color: #636e72;
+            font-weight: 400;
+            margin-top: 0.3rem;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            animation: sparkleAnim 1.5s ease-in-out infinite;
+        }
+
+        .sparkle::before, .sparkle::after {
+            content: '';
+            position: absolute;
+            background: #ffd93d;
+        }
+
+        .sparkle::before {
+            width: 100%;
+            height: 2px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .sparkle::after {
+            width: 2px;
+            height: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .sparkle:nth-child(1) { top: -10px; left: -15px; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: -10px; right: -15px; animation-delay: 0.5s; }
+        .sparkle:nth-child(3) { bottom: -10px; left: 50%; animation-delay: 1s; }
+
+        @keyframes sparkleAnim {
+            0%, 100% { transform: scale(0) rotate(0deg); opacity: 0; }
+            50% { transform: scale(1) rotate(180deg); opacity: 1; }
+        }
+
+        /* ===== BOTÓN WHATSAPP ===== */
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            text-decoration: none;
+            padding: 1.2rem 3rem;
+            border-radius: 60px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.4);
+            position: relative;
+            overflow: hidden;
+            animation: heroEntrance 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 1.3s;
+            opacity: 0;
+        }
+
+        .whatsapp-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: btnShine 2s ease-in-out infinite;
+        }
+
+        @keyframes btnShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(37, 211, 102, 0.5);
+        }
+
+        .whatsapp-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .whatsapp-icon {
+            width: 30px;
+            height: 30px;
+            fill: white;
+            animation: iconWobble 2s ease-in-out infinite;
+        }
+
+        @keyframes iconWobble {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        .btn-phone {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-top: 0.2rem;
+        }
+
+        /* ===== FEATURES SECTION ===== */
+        .features {
+            position: relative;
+            z-index: 1;
+            padding: 4rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .features-title {
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 800;
+            margin-bottom: 3rem;
+            color: #2d3436;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.9);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+            transform: translateY(50px);
+            animation: featureAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 1.5s; }
+        .feature-card:nth-child(2) { animation-delay: 1.8s; }
+        .feature-card:nth-child(3) { animation-delay: 2.1s; }
+        .feature-card:nth-child(4) { animation-delay: 2.4s; }
+        .feature-card:nth-child(5) { animation-delay: 2.7s; }
+        .feature-card:nth-child(6) { animation-delay: 3.0s; }
+
+        @keyframes featureAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+        }
+
+        .feature-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: emojiFloat 3s ease-in-out infinite;
+        }
+
+        .feature-card:nth-child(odd) .feature-emoji { animation-delay: 0s; }
+        .feature-card:nth-child(even) .feature-emoji { animation-delay: 1.5s; }
+
+        @keyframes emojiFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: #2d3436;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #636e72;
+            line-height: 1.6;
+        }
+
+        /* ===== COUNTDOWN / URGENCIA ===== */
+        .urgency-banner {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24, #ff9a3c);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(255, 107, 107, 0.3);
+            animation: urgencyPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes urgencyPulse {
+            0%, 100% { box-shadow: 0 15px 50px rgba(255, 107, 107, 0.3); }
+            50% { box-shadow: 0 20px 70px rgba(255, 107, 107, 0.5); }
+        }
+
+        .urgency-banner h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .urgency-banner p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* ===== TESTIMONIOS ===== */
+        .testimonials {
+            position: relative;
+            z-index: 1;
+            padding: 4rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .testimonials-title {
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 3rem;
+            color: #2d3436;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.9);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: featureAppear 0.8s ease forwards;
+        }
+
+        .testimonial-card:nth-child(1) { animation-delay: 2s; }
+        .testimonial-card:nth-child(2) { animation-delay: 2.3s; }
+        .testimonial-card:nth-child(3) { animation-delay: 2.6s; }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        .stars {
+            color: #ffd93d;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-size: 0.95rem;
+            color: #636e72;
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: #2d3436;
+            font-size: 0.9rem;
+        }
+
+        /* ===== CTA FINAL ===== */
+        .final-cta {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 5rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .final-cta h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: #2d3436;
+        }
+
+        .final-cta p {
+            font-size: 1.1rem;
+            color: #636e72;
+            margin-bottom: 2rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem;
+            color: #b2bec3;
+            font-size: 0.85rem;
+        }
+
+        /* ===== CONFETTI ===== */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            animation: confettiFall linear infinite;
+        }
+
+        .confetti:nth-child(1) { left: 5%; background: #ff6b6b; animation-duration: 8s; animation-delay: 0s; width: 8px; height: 8px; border-radius: 50%; }
+        .confetti:nth-child(2) { left: 15%; background: #ffd93d; animation-duration: 10s; animation-delay: 1s; width: 12px; height: 6px; border-radius: 2px; }
+        .confetti:nth-child(3) { left: 25%; background: #6bcb77; animation-duration: 9s; animation-delay: 2s; width: 10px; height: 10px; border-radius: 50%; }
+        .confetti:nth-child(4) { left: 35%; background: #4d96ff; animation-duration: 11s; animation-delay: 0.5s; width: 6px; height: 14px; border-radius: 3px; }
+        .confetti:nth-child(5) { left: 45%; background: #a66cff; animation-duration: 7s; animation-delay: 3s; width: 14px; height: 8px; border-radius: 2px; }
+        .confetti:nth-child(6) { left: 55%; background: #ff9a3c; animation-duration: 12s; animation-delay: 1.5s; width: 10px; height: 10px; border-radius: 50%; }
+        .confetti:nth-child(7) { left: 65%; background: #ff6b9d; animation-duration: 9s; animation-delay: 4s; width: 8px; height: 16px; border-radius: 3px; }
+        .confetti:nth-child(8) { left: 75%; background: #00cec9; animation-duration: 10s; animation-delay: 2.5s; width: 12px; height: 12px; border-radius: 50%; }
+        .confetti:nth-child(9) { left: 85%; background: #fdcb6e; animation-duration: 8s; animation-delay: 0.8s; width: 6px; height: 10px; border-radius: 2px; }
+        .confetti:nth-child(10) { left: 95%; background: #e17055; animation-duration: 11s; animation-delay: 3.5s; width: 10px; height: 10px; border-radius: 50%; }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) rotate(720deg) scale(0.3);
+                opacity: 0;
+            }
+        }
+
+        /* ===== WAVE DECORATION ===== */
+        .wave-divider {
+            position: relative;
+            z-index: 1;
+            height: 80px;
+            overflow: hidden;
+        }
+
+        .wave-divider svg {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 80px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .main-card {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .whatsapp-btn {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== GLOW EFFECTS ===== */
+        .glow-1 {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.15), transparent 70%);
+            border-radius: 50%;
+            top: 10%;
+            right: 5%;
+            animation: glowFloat 6s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        .glow-2 {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(108, 99, 255, 0.12), transparent 70%);
+            border-radius: 50%;
+            bottom: 20%;
+            left: 5%;
+            animation: glowFloat 8s ease-in-out infinite reverse;
+            z-index: 0;
+        }
+
+        @keyframes glowFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -20px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        /* ===== ROTATING RING ===== */
+        .rotating-ring {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border: 2px dashed rgba(255, 215, 0, 0.1);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: ringRotate 20s linear infinite;
+            z-index: -1;
+        }
+
+        .rotating-ring:nth-child(2) {
+            width: 600px;
+            height: 600px;
+            border-color: rgba(108, 99, 255, 0.08);
+            animation-duration: 25s;
+            animation-direction: reverse;
+        }
+
+        @keyframes ringRotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Partículas flotantes -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Confeti -->
+    <div class="confetti-container">
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+    </div>
+
+    <!-- Efectos glow -->
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="rotating-ring"></div>
+        <div class="rotating-ring"></div>
+
+        <div class="hero-content">
+            <div class="badge">🎓 Inscripciones Abiertas 2026</div>
+            <h1>
+                Preparación PAA
+                <span>Colegios Científicos</span>
+            </h1>
+            <p class="hero-subtitle">
+                ¡Alcanza tu <strong>máximo puntaje</strong> en la Prueba de Aptitud Académica!<br>
+                Clases presenciales todos los <strong>sábados</strong> con los mejores docentes
+            </p>
+
+            <!-- Tarjeta principal -->
+            <div class="main-card">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-icon">📅</span>
+                        <div class="info-label">Día</div>
+                        <div class="info-value">Sábados</div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">⏰</span>
+                        <div class="info-label">Horario</div>
+                        <div class="info-value">8:30 am - 1:30 pm</div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">📚</span>
+                        <div class="info-label">Duración</div>
+                        <div class="info-value">20 Horas</div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">🏫</span>
+                        <div class="info-label">Modalidad</div>
+                        <div class="info-value">Presencial</div>
+                    </div>
+                </div>
+
+                <div class="price-section">
+                    <div class="price-tag">
+                        <span class="sparkle"></span>
+                        <span class="sparkle"></span>
+                        <span class="sparkle"></span>
+                        <div class="price-label">Inversión Total</div>
+                        <div class="price-amount">₡87,000</div>
+                        <div class="price-currency">Colones costarricenses</div>
+                    </div>
+                </div>
+
+                <a href="https://wa.me/50650005566?text=Hola%2C%20quiero%20inscribirme%20en%20el%20curso%20de%20preparaci%C3%B3n%20PAA%20para%20Colegios%20Cient%C3%ADficos" class="whatsapp-btn" target="_blank">
+                    <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    <div>
+                        ¡Inscríbete Ahora!
+                        <span class="btn-phone">WhatsApp: 5000 5566</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banner de urgencia -->
+    <div class="urgency-banner reveal">
+        <h3>🔥 ¡Cupos Limitados!</h3>
+        <p>No pierdas esta oportunidad. Inscríbete hoy y asegura tu lugar en el curso.</p>
+    </div>
+
+    <!-- Características -->
+    <section class="features">
+        <h2 class="features-title reveal">¿Por qué elegir nuestro curso?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-emoji">🧠</span>
+                <h3>Matemática Intensiva</h3>
+                <p>Domina álgebra, geometría, estadística y resolución de problemas con ejercicios tipo PAA.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-emoji">📖</span>
+                <h3>Español y Redacción</h3>
+                <p>Mejora tu comprensión lectora, analogías, vocabulario y habilidades de redacción.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-emoji">🎯</span>
+                <h3>Simulacros Reales</h3>
+                <p>Pruebas de práctica con condiciones reales para que llegues preparado el día del examen.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-emoji">👨‍🏫</span>
+                <h3>Docentes Expertos</h3>
+                <p>Profesores especializados en la PAA con años de experiencia y altos puntajes de sus estudiantes.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-emoji">📊</span>
+                <h3>Seguimiento Personalizado</h3>
+                <p>Identificamos tus áreas de mejora y creamos un plan de estudio adaptado a tus necesidades.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-emoji">🏆</span>
+                <h3>Resultados Comprobados</h3>
+                <p>Cientos de estudiantes han logrado ingresar a la universidad gracias a nuestra preparación.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="testimonials">
+        <h2 class="testimonials-title reveal">Lo que dicen nuestros estudiantes</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Gracias a este curso logré el puntaje que necesitaba para entrar a la UCR. Los profes son increíbles y las clases muy dinámicas."</p>
+                <div class="testimonial-author">— María Fernanda, UCR</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Los simulacros me ayudaron muchísimo a manejar el tiempo y los nervios el día del examen. ¡100% recomendado!"</p>
+                <div class="testimonial-author">— Carlos Andrés, UNA</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Pasé de un puntaje bajo a uno excelente en solo unas semanas. La metodología del curso es lo mejor."</p>
+                <div class="testimonial-author">— Valentina, TEC</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="final-cta reveal">
+        <h2>🚀 ¿Listo para conquistar la PAA?</h2>
+        <p>No dejes que el examen defina tu futuro sin la mejor preparación. <strong>¡Inscríbete hoy!</strong></p>
+        <a href="https://wa.me/50650005566?text=Hola%2C%20quiero%20inscribirme%20en%20el%20curso%20de%20preparaci%C3%B3n%20PAA%20para%20Colegios%20Cient%C3%ADficos" class="whatsapp-btn" target="_blank" style="animation-delay: 0s; opacity: 1;">
+            <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            <div>
+                Escribir al WhatsApp
+                <span class="btn-phone">5000 5566</span>
+            </div>
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Curso de Preparación PAA — Colegios Científicos | Todos los derechos reservados</p>
+    </footer>
+
+    <!-- Scroll Reveal Script -->
+    <script>
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                const revealPoint = 150;
+
+                if (elementTop < windowHeight - revealPoint) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth parallax for particles
+        window.addEventListener('mousemove', (e) => {
+            const particles = document.querySelectorAll('.particle');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            particles.forEach((particle, i) => {
+                const speed = (i + 1) * 0.5;
+                particle.style.transform += ` translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
